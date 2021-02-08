@@ -37,36 +37,36 @@ function preload(){
 }
 
 function setup() {
-  createCanvas(displayWidth,displayHeight);
+  createCanvas(displayWidth-50,displayHeight-100);
 
  
   
-  trex = createSprite(displayWidth-1300,displayHeight-110,20,50);
+  trex = createSprite(displayWidth-1300,displayHeight-216,20,50);
   trex.addAnimation("running", trex_running);
   trex.addAnimation("collided", trex_collided);
   trex.setCollider('circle',0,0,350)
 
   trex.scale = 0.12;
   
-  ground = createSprite(camera.x,displayHeight-20,displayWidth+10000000000000,20);
+  ground = createSprite(displayWidth/2,displayHeight-20,displayWidth+10000000000000,20);
   ground.addImage("ground",groundImage);
   ground.x = ground.width /2;
   trex.depth=ground.depth;
 trex.depth=trex.depth=1;
-  gameOver = createSprite(camera.x,displayHeight/2-300);
+  gameOver = createSprite(camera.x+800,displayHeight/2-300);
   gameOver.addImage(gameOverImg);
   
-  restart = createSprite(camera.x,displayHeight/2-20);
+  restart = createSprite(camera.x+800,displayHeight/2-20);
   restart.addImage(restartImg);
   
  
   gameOver.scale = 2
   restart.scale = 0.5
   
-  invisibleGround = createSprite(camera.x,displayHeight-110,displayWidth+10000000,20);
+  invisibleGround = createSprite(displayWidth/2,displayHeight-216,displayWidth+10000000,20);
   invisibleGround.visible = false;
   
-  ground.scale=1.2
+  ground.scale=2.5 
   obstaclesGroup = createGroup();
   cloudsGroup = createGroup();
 
@@ -84,7 +84,7 @@ function draw() {
   text("Score: "+ score, camera.x+200,displayHeight/2-100);
   console.log(getFrameRate());
   
-  camera.x=trex.x
+
   if(gameState === PLAY){
 trex.changeAnimation("running", trex_running);
     gameOver.visible = false;
@@ -103,7 +103,7 @@ trex.changeAnimation("running", trex_running);
     }
     
     
-    if(keyDown("space")&& trex.y >= displayHeight/2+60) {
+    if(keyDown("space")&& trex.y >= displayHeight/2-50) {
         trex.velocityY = -12;
         jumpSound.play();
     }
@@ -174,7 +174,7 @@ function reset(){
 
 function spawnObstacles(){
  if (frameCount % 60 === 0){
-   var obstacle = createSprite(camera.x+displayWidth/2,displayHeight-150,10,40);
+   var obstacle = createSprite(camera.x+displayWidth/2,displayHeight-256,10,40);
    obstacle.velocityX = -(6 + score/100);
    
   
@@ -188,20 +188,20 @@ function spawnObstacles(){
               break;
       case 3: obstacle.addImage(obstacle3);
       obstacle.scale = 0.25;
-      obstacle.y=displayHeight-180
+      obstacle.y=displayHeight-286
       obstacle.setCollider('rectangle',0,150,550,420)
               break;
       case 4: obstacle.addImage(obstacle4);
-      obstacle.y=displayHeight-150
+      obstacle.y=displayHeight-256
       obstacle.scale = 0.4;
               break;
       case 5: obstacle.addImage(obstacle5);
-      obstacle.y=displayHeight-180
+      obstacle.y=displayHeight-286
       obstacle.scale = 0.25;
       obstacle.setCollider('rectangle',0,150,550,420)
               break;
       case 6: obstacle.addImage(obstacle1);
-      obstacle.y=displayHeight-150
+      obstacle.y=displayHeight-256
       obstacle.scale = 0.4;
               break;
       default: break;
