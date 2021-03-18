@@ -129,8 +129,9 @@ trex.changeAnimation("running", trex_running);
    else if (gameState === END) {
       gameOver.visible = true;
       restart.visible = true;
-     if(mousePressedOver(restart)) {
+     if(touches.length>0 || mousePressedOver(restart)) {
       reset();
+      touches=[]
     }
 
 
