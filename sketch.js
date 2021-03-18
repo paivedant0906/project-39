@@ -103,9 +103,10 @@ trex.changeAnimation("running", trex_running);
     }
     
     
-    if(keyDown("space")&& trex.y >= displayHeight/2-50) {
+    if(touches.length>0 || keyDown("space")&& trex.y >= displayHeight/2-50) {
         trex.velocityY = -12;
         jumpSound.play();
+        touches=[]
     }
     
     
